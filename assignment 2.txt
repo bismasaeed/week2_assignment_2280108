@@ -17,16 +17,13 @@ class MyApp extends StatelessWidget {
 }
 
 class ToDoItem {
-
   final String task;
   final bool isChecked;
 
   const ToDoItem(this.task, this.isChecked);
 }
 
-
 class MyHomePage extends StatelessWidget {
-
   const MyHomePage({super.key});
 
   final List<ToDoItem> toDoList = const [
@@ -53,26 +50,19 @@ class MyHomePage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(30.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // a loop i applied to display the task 
             for (int i = 0; i < toDoList.length; i++)
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 6.0),
-                child: Row(  //  padding only affects whatever is inside child.
+                child: Row(
                   children: [
-                    // serial number is printed first
-                    Text('${i + 1}.  ', style: TextStyle(fontSize: 18)),
-
-                    // task (Expands to take available space)
+                    Text('${i + 1}.  ', style: const TextStyle(fontSize: 18)),
                     Expanded(
                       child: Text(
                         toDoList[i].task,
                         style: const TextStyle(fontSize: 18),
                       ),
                     ),
-
-                    // icon 
                     Text(
                       toDoList[i].isChecked ? "-Completed ✅" : "-Pending ❌",
                       style: const TextStyle(fontSize: 18),
@@ -80,8 +70,6 @@ class MyHomePage extends StatelessWidget {
                   ],
                 ),
               ),
-
-            // image
             Center(
               child: Image.network(
                 'https://th.bing.com/th/id/R.4bde2dc0197208116beadf5e059e0f0a?rik=Meh0SLtW7%2bPdZQ&riu=http%3a%2f%2flifepalette.com%2fwp-content%2fuploads%2f2016%2f08%2fwork-in-denmark.jpg&ehk=kkmMqhLQ47LMh%2fOkCEjqhFgLkXIA8kV0XKY99ej%2f47k%3d&risl=&pid=ImgRaw&r=0',

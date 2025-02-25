@@ -1,0 +1,98 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: const MyHomePage(),
+    );
+  }
+}
+
+class ToDoItem {
+
+  final String task;
+  final bool isChecked;
+
+  const ToDoItem(this.task, this.isChecked);
+}
+
+
+class MyHomePage extends StatelessWidget {
+
+  const MyHomePage({super.key});
+
+  final List<ToDoItem> toDoList = const [
+    ToDoItem("Wake up early and drink a glass of water 💧", true),
+    ToDoItem("Attend university/classes or study 📖", false),
+    ToDoItem("Stay hydrated and take short breaks 🥤", true),
+    ToDoItem("Go for a short walk or exercise 🚶‍♂️🏃", false),
+    ToDoItem("Organize or clean your study space 🧹", true),
+    ToDoItem("Sleep early for a fresh start tomorrow 😴", false),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.purpleAccent,
+        title: const Center(
+          child: Text(
+            'My To-Do List',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(30.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // a loop i applied to display the task 
+            for (int i = 0; i < toDoList.length; i++)
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 6.0),
+                child: Row(  //  padding only affects whatever is inside child.
+                  children: [
+                    // serial number is printed first
+                    Text('${i + 1}.  ', style: TextStyle(fontSize: 18)),
+
+                    // task (Expands to take available space)
+                    Expanded(
+                      child: Text(
+                        toDoList[i].task,
+                        style: const TextStyle(fontSize: 18),
+                      ),
+                    ),
+
+                    // icon 
+                    Text(
+                      toDoList[i].isChecked ? "-Completed ✅" : "-Pending ❌",
+                      style: const TextStyle(fontSize: 18),
+                    ),
+                  ],
+                ),
+              ),
+
+            // image
+            Center(
+              child: Image.network(
+                'https://th.bing.com/th/id/R.4bde2dc0197208116beadf5e059e0f0a?rik=Meh0SLtW7%2bPdZQ&riu=http%3a%2f%2flifepalette.com%2fwp-content%2fuploads%2f2016%2f08%2fwork-in-denmark.jpg&ehk=kkmMqhLQ47LMh%2fOkCEjqhFgLkXIA8kV0XKY99ej%2f47k%3d&risl=&pid=ImgRaw&r=0',
+                height: 200,
+                width: 500,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
